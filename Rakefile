@@ -12,32 +12,51 @@ desc "Run all specs"
 task :spec do
 end
 
+
+def template_generator(template, options={})
+  name_prefix = options[:name_prefix] || ""
+  
+  `mkdir -p build; mkdir -p build/#{template}`
+  `cat pkg/#{template}.tpl.pre mustache.js pkg/#{template}.tpl.post > build/#{template}/#{name_prefix}mustache.js`
+  print "Done, see ./build/#{template}/#{name_prefix}mustache.js\n"
+end
+
+
 task :commonjs do
   print "Packaging for CommonJS\n"
-  `mkdir lib`
-  `cp mustache.js lib/mustache.js`
-  print "Done.\n"
+  template_generator("commonjs")
 end
 
 task :jquery do
   print "Packaging for jQuery\n"
-  source = "mustache-jquery"
-  target_jq = "jquery.mustache.js"
-  `cat #{source}/#{target_jq}.tpl.pre mustache.js #{source}/#{target_jq}.tpl.post > #{target_jq}`
-  print "Done, see ./#{target_jq}\n"
+  template_generator("jquery", :name_prefix=>"jquery.")
 end
 
 
 task :dojo do
   print "Packaging for dojo\n"
-  source = "mustache-dojo"
-  target_js = "mustache.js"
-  `mkdir -p dojox; mkdir -p dojox/string`
-  `cat #{source}/#{target_js}.tpl.pre mustache.js #{source}/#{target_js}.tpl.post > dojox/string/#{target_js}`
-  print "Done, see ./dojox/string/#{target_js} Include using dojo.require('dojox.string.mustache.'); \n"
+  # handle dojo with a bit of love
+  path = %w(build dojo dojox string)
+  prefix = ""
+  path.each{|p|
+    `mkdir -p #{prefix}#{p}`
+    prefix += "#{p}/"
+  }
+  `cat pkg/dojo.tpl.pre mustache.js pkg/dojo.tpl.post > build/dojo/dojox/string/mustache.js`
+  print "Done, see ./build/dojo/dojox/string/mustache.js | Include using dojo.require('dojox.string.mustache'); \n"
+end
+
+
+task :build do
+  ["jquery", "commonjs", "dojo"].each{|t|
+    Rake::Task[t].execute
+  }
 end
 
 
 task :clean do
   `for file in \`cat .gitignore\`; do rm -rf $file; done`
 end
+
+
+

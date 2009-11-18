@@ -1,4 +1,4 @@
 runner.js
 lib
-jquery.mustache.js
-dojox
+build/
+.DS_Store

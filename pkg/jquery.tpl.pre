@@ -1,0 +1,10 @@
+/*
+Mustache templating library made available for jQuery
+
+Shameless port of a shameless port
+@defunkt => @janl => @aq
+ 
+See http://github.com/janl/mustache.js for more info about Mustache itself.
+*/
+ 
+;(function($) {
