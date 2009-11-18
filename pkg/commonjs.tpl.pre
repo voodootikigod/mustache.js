@@ -1,0 +1,10 @@
+/*
+Mustache templating library made available for the CommonJS environment using the 
+modules definition available at: http://wiki.commonjs.org/wiki/Modules/1.1
+
+Shameless port of a shameless port
+@defunkt => @janl => @aq => @voodootikigod
+ 
+See http://github.com/janl/mustache.js for more info about Mustache itself.
+*/
+
