@@ -8,7 +8,7 @@ by Jan Lehnardt <jan@apache.org>.
 Thanks @defunkt for the awesome code.
 
 ## Where to use?
-You can use mustache.js rendering stuff in various scenarios. E.g. you can render templates in your browser, or rendering server-side stuff with [node.js][node.js], use it for rendering stuff in [CouchDB][couchdb]'s views. To generate platform specific libraries that allow mustache.js to integrate naturally use one of hte folowing:
+You can use mustache.js rendering stuff in various scenarios. E.g. you can render templates in your browser, or rendering server-side stuff with [node.js][node.js], use it for rendering stuff in [CouchDB][couchdb]'s views. To generate platform specific libraries that allow mustache.js to integrate naturally, use one of the folowing:
     
     rake jquery
     rake commonjs
