@@ -1,2 +1,3 @@
 
 exports.to_html = Mustache.to_html;
+exports.toHTML = Mustache.to_html;
